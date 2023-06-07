@@ -35,3 +35,51 @@ New User Registration:
   * They can also contact customer support through various channels, such as live chat, email, or phone, for any issues or queries they may have.
 
 Remember, these customer journeys can be customized based on your specific requirements and the nature of your appointment booking system.
+## Rest Endpoints
+Here are some REST endpoints and the functionality they can cover based on the user journeys mentioned earlier:
+
+1. User Registration:
+  * Endpoint: POST /api/users/register
+  * Functionality: Creates a new user account with the provided registration details.
+
+2. User Login:
+  * Endpoint: POST /api/users/login
+  * Functionality: Authenticates the user based on the provided login credentials and returns an access token for subsequent API requests.
+
+3. Browse Services:
+  * Endpoint: GET /api/services
+  * Functionality: Retrieves a list of available services and their details.
+
+4. Selecting a Service:
+  * Endpoint: GET /api/services/{serviceId}
+  * Functionality: Retrieves the details of a specific service based on its ID.
+
+5. Check Availability:
+  * Endpoint: GET /api/services/{serviceId}/availability?date={selectedDate}
+  * Functionality: Retrieves the available time slots for a specific service on the selected date.
+
+6. Booking an Appointment:
+  * Endpoint: POST /api/appointments
+  * Functionality: Creates a new appointment for the user with the selected service, date, and time slot.
+
+7. View Upcoming Appointments:
+  * Endpoint: GET /api/appointments
+  * Functionality: Retrieves a list of upcoming appointments for the authenticated user.
+
+8. Reschedule or Cancel Appointment:
+  * Endpoint: PUT /api/appointments/{appointmentId}
+  * Functionality: Allows the user to reschedule or cancel a specific appointment based on its ID.
+
+9. Provide Feedback and Ratings:
+  * Endpoint: POST /api/appointments/{appointmentId}/feedback
+  * Functionality: Allows the user to provide feedback and ratings for a specific appointment.
+
+10. Support and Assistance:
+  * Endpoint: GET /api/support/faq
+  * Functionality: Retrieves a list of frequently asked questions and their answers.
+
+11. Contact Customer Support:
+  * Endpoint: POST /api/support/contact
+  * Functionality: Sends a support request or inquiry to the customer support team.
+
+These are just example endpoints, and you can modify them based on your specific requirements and naming conventions. Additionally, you may need to include authentication and authorization mechanisms to secure the API endpoints.
