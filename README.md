@@ -1,4 +1,4 @@
-﻿# Self Service Aappointment Booking (SSAB)
+﻿# Self Service Appointment Booking (SSAB)
 
 ## Customer Jouneys
 Here are some customer journeys for an online self-service multiple purpose appointment booking system:
@@ -117,3 +117,37 @@ Here's an outline of the frontend app components, services, guards, and other ke
 4. Form Validation: Implements form validation to ensure data integrity and provide user feedback on invalid inputs.
 
 These are just the foundational components, services, guards, and other elements that you may need in your Angular application. You can further customize and expand upon these as per your specific requirements and application design.
+
+
+## Authentication and Authorization Design
+
+Here's an explanation of how you can handle user authentication and authorization in your Angular application:
+
+### Authentication:
+
+1. Registration: When a user registers, their information (e.g., name, email, password) is sent to the backend API (UserService) via a registration form (RegistrationComponent). The API validates and stores the user's information in a database.
+2. Login: The user enters their credentials (email and password) in the login form (LoginComponent). These credentials are sent to the backend API (AuthService), which verifies them against the stored user information. If the credentials are valid, the API generates an access token (JWT or similar) and sends it back to the frontend.
+3. Token Storage: The access token is securely stored in the frontend (e.g., local storage or cookies) to maintain the user's authenticated state across different pages or app reloads.
+4. Authentication Guard: An AuthGuard is implemented as a route guard in Angular. It checks if the user has a valid access token. If the token is present, the user is allowed to access protected routes. If the token is missing or invalid, the user is redirected to the login page.
+### Authorization:
+
+1. User Roles: Each user in the system may have one or more roles assigned to them (e.g., admin, regular user). These roles determine the user's level of access and permissions within the application.
+2. Role-Based Guard: A RoleGuard can be implemented to restrict access to specific routes based on the user's role. For example, an admin user might have access to an admin dashboard, while a regular user may not.
+3. Backend Validation: While the frontend RoleGuard restricts UI-level access, it's crucial to validate user roles on the backend as well. The backend API should enforce authorization rules to prevent unauthorized access to sensitive resources or actions.
+4. API Permissions: Each API endpoint should have appropriate permission checks to ensure that only authorized users (with the required roles) can access or modify specific resources. For example, an endpoint to delete a service may only be accessible to admin users.
+
+
+By implementing authentication and authorization mechanisms, you can ensure that only authenticated users can access protected parts of your application and that they have the necessary roles and permissions to perform specific actions. This helps maintain security and control over sensitive data and functionality.
+
+## Token management in frontend app
+The storage and usage of roles for every user interaction typically involve the following steps:
+
+1. Role Definition: Define the roles that will be used in your application (e.g., admin, user, manager). Each role should have specific permissions and access levels associated with it.
+2. User Role Assignment: Store the user's role information in your backend database. When a user registers or is created, assign the appropriate role(s) to them based on your application's business logic. This information should be associated with the user's account.
+3. Token-Based Authentication: During the authentication process, generate an access token (JWT or similar) on the backend and include the user's role(s) as a part of the token's payload. The token is then sent back to the frontend and stored securely (e.g., local storage or cookies) for subsequent requests.
+4. Access Token Verification: On each subsequent request, the frontend includes the access token in the request headers. The backend verifies the token's authenticity and integrity, and extracts the user's role(s) from the token's payload.
+5. Middleware/Interceptor: Implement a middleware or interceptor on the backend to extract and validate the role(s) from the access token. This middleware can ensure that the user making the request has the necessary role(s) to perform the requested action.
+6. Authorization Checks: In your backend API routes and endpoints, implement authorization checks based on the user's role(s). For each action or resource, check if the user's role(s) match the required role(s) for that specific action or resource. If the roles don't match, return an error or deny access.
+7. Frontend UI Controls: On the frontend, you can use the user's role(s) to conditionally render or disable certain UI components and features based on their permissions. For example, an admin user might see additional options or have access to admin-specific functionalities that regular users don't.
+
+By storing the user's role(s) in the access token and implementing role-based authorization checks in your backend API, you can control access to various parts of your application and ensure that users have the appropriate permissions for each interaction.
