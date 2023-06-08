@@ -99,6 +99,33 @@ Here's a deep dive into the all the REST endpoints, including the models, their 
 
 These are example endpoints with their associated request and response details. You can customize them based on your specific needs, including additional properties or validation rules for each model.
 
+### Open API Documentation
+springdoc-openapi java library helps to automate the generation of API documentation using spring boot projects. springdoc-openapi works by examining an application at runtime to infer API semantics based on spring configurations, class structure and various annotations.
+
+Automatically generates documentation in JSON/YAML and HTML format APIs. This documentation can be completed by comments using swagger-api annotations.
+
+Add the library to the list of your project dependencies (No additional configuration is needed)
+```xml
+   <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+      <version>2.1.0</version>
+   </dependency>
+```
+
+The Swagger UI page will then be available at 
+```css
+http://server:port/context-path/swagger-ui.html 
+```
+and the OpenAPI description will be available at the following url for json format: 
+```css
+http://server:port/context-path/v3/api-docs
+```
+* server: The server name or IP 
+* port: The server port 
+* context-path: The context path of the application
+
+Documentation can be available in yaml format as well, on the following path : /v3/api-docs.yaml
 ### Reference Documentation
 For further reference, please consider the following sections:
 
