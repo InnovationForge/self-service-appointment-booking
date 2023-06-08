@@ -1,4 +1,103 @@
-# Getting Started
+# SSAB Server
+
+## REST API Endpoints
+Here's a deep dive into the all the REST endpoints, including the models, their properties, and the request/response for each endpoint:
+
+### User Registration:
+
+#### Request:
+* Endpoint: POST /api/users/register 
+* Request Body: { name, email, password }
+#### Response:
+* Status 201: User successfully registered 
+* Status 400: Invalid input or duplicate email 
+* Status 500: Internal server error
+
+### User Login:
+#### Request:
+* Endpoint: POST /api/users/login
+* Request Body: { email, password }
+#### Response:
+* Status 200: Login successful, returns access token
+* Status 400: Invalid credentials
+* Status 500: Internal server error
+
+### Browse Services:
+#### Request:
+* Endpoint: GET /api/services
+#### Response:
+* Status 200: Returns an array of services [{ id, name, description, price }]
+* Status 500: Internal server error
+
+### Selecting a Service:
+#### Request:
+* Endpoint: GET /api/services/{serviceId}
+#### Response:
+* Status 200: Returns the details of the selected service { id, name, description, price }
+* Status 404: Service not found
+* Status 500: Internal server error
+
+### Check Availability:
+#### Request:
+* Endpoint: GET /api/services/{serviceId}/availability?date={selectedDate}
+#### Response:
+* Status 200: Returns available time slots for the selected service and date [{ id, startTime, endTime }]
+* Status 400: Invalid input or date format
+* Status 500: Internal server error
+
+### Booking an Appointment:
+#### Request:
+* Endpoint: POST /api/appointments
+* Request Body: { userId, serviceId, date, timeSlotId, notes }
+#### Response:
+* Status 201: Appointment successfully booked, returns the appointment details { id, userId, serviceId, date, timeSlotId, notes }
+* Status 400: Invalid input or appointment clash
+* Status 500: Internal server error
+
+### View Upcoming Appointments:
+#### Request:
+* Endpoint: GET /api/appointments?userId={userId}
+#### Response:
+* Status 200: Returns an array of upcoming appointments for the specified user [{ id, userId, serviceId, date, timeSlotId, notes }]
+* Status 500: Internal server error
+
+### Reschedule or Cancel Appointment:
+#### Request:
+* Endpoint: PUT /api/appointments/{appointmentId}
+* Request Body: { date, timeSlotId }
+#### Response:
+* Status 200: Appointment successfully rescheduled or canceled, returns the updated appointment details { id, userId, serviceId, date, timeSlotId, notes }
+* Status 400: Invalid input or appointment clash
+* Status 404: Appointment not found
+* Status 500: Internal server error
+
+### Provide Feedback and Ratings:
+#### Request:
+* Endpoint: POST /api/appointments/{appointmentId}/feedback
+* Request Body: { rating, comment }
+#### Response:
+* Status 201: Feedback successfully submitted
+* Status 400: Invalid input
+* Status 404: Appointment not found
+* Status 500: Internal server error
+
+### Support and Assistance:
+#### Request:
+* Endpoint: GET /api/support/faq
+#### Response:
+* Status 200: Returns an array of frequently asked questions [{ id, question, answer }]
+* Status 500: Internal server error
+
+### Contact Customer Support:
+#### Request:
+* Endpoint: POST /api/support/contact 
+* Request Body: { name, email, message }
+#### Response:
+* Status 201: Support request successfully submitted 
+* Status 400: Invalid input 
+* Status 500: Internal server error
+
+These are example endpoints with their associated request and response details. You can customize them based on your specific needs, including additional properties or validation rules for each model.
 
 ### Reference Documentation
 For further reference, please consider the following sections:
